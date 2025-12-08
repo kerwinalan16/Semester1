@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Assignment {
     public String assignmentId;
@@ -14,4 +15,54 @@ public class Assignment {
         this.scores = new ArrayList<>();
         this.assignmentId = String.format("%03d", nextId++);
     }
+    public double calcAssignmentAvg() {
+        if (scores.isEmpty()) return 0;
+        double sum = 0;
+        for (Integer score : scores) {
+            if (score != null) sum += score;
+        }
+        return sum / scores.size();
+    }
+
+    /**
+     * Generates random scores for all students in this assignment according to the following rules:
+     * Generate a random number r in the range [0, 10].
+     * If r == 0, generate a score in the range [0, 60).
+     * If r == 1 or 2, generate a score in the range [60, 70).
+     * If r == 3 or 4, generate a score in the range [70, 80).
+     * If r >= 5 and <= 8, generate a score in the range [80, 90).
+     * If r == 9 or 10, generate a score in the range [90, 100].
+     * @param numberOfStudents the number of students to generate scores for
+     */
+    public void generateRandomScore(int numberOfStudents) {
+        Random random = new Random();
+        for (int i = 0; i < numberOfStudents; i++) {
+            int r = random.nextInt(11); // 0-10
+            int score;
+            if (r == 0) {
+                score = random.nextInt(60); // 0-59
+            } else if (r == 1 || r == 2) {
+                score = random.nextInt(60, 70); // 60-69
+            } else if (r == 3 || r == 4) {
+                score = random.nextInt(70, 80); // 70-79
+            } else if (r >= 5 && r <= 8) {
+                score = random.nextInt(80, 90); // 80-89
+            } else {
+                score = random.nextInt(90, 101); // 90-100
+            }
+            scores.add(score);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "assignmentId='" + assignmentId + '\'' +
+                ", assignmentName='" + assignmentName + '\'' +
+                ", weight='" + weight + '\'' +
+                ", scores=" + scores +
+                '}';
+    }
+
+
 }
