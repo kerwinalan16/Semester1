@@ -1,10 +1,16 @@
 package util;
 public class Util {
+    /**
+     * Converts each word in a string to title case.
+     * Assumes words are separated by a single space.
+     * Example: "yi wang, computer science and math" -> "Yi Wang, Computer Science And Math"
+     * @param str the input string
+     * @return the string converted to title case
+     */
     public static String toTitleCase(String str) {
         if (str == null || str.isEmpty()) {
             return str;
         }
-
         String[] words = str.split(" ");
         String titleCase = "";
 
