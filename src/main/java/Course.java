@@ -140,6 +140,42 @@ public class Course {
         System.out.println();
     }
 
+    /**
+     * converts a course to a simple string with only the courseId, the courseName, the credits, and departmentName
+     * @return the simplifiedString
+     */
+    public String toSimplifiedString() {
+        return "Course ID: " + courseId +
+                "Course Name: " + courseName +
+                "Credits: " + credits +
+                "Department Name: " + department.getDepartmentName();
+    }
+
+    @Override
+    public String toString() {
+        String toStringCourse = "";
+        toStringCourse += "Course ID: " + courseId + "\n";
+        toStringCourse += "Course Name: " + courseName + "\n";
+        toStringCourse += "Credits: " + credits + "\n";
+        toStringCourse += "Department: " + department.getDepartmentName()+ "\n";
+
+        toStringCourse += "Assignments:\n";
+        for (Assignment assignment : assignments) {
+            toStringCourse += " " + assignment + "\n";
+        }
+
+        toStringCourse += "Registered Students: \n";
+        for (Student student : registeredStudents) {
+            toStringCourse += " " +
+                    "Student ID: " + student.getStudentId() + "\n" +
+                    "Student Name: " + student.getStudentName() + "\n" +
+                    "Department: " + student.getDepartment().getDepartmentName() + "\n";
+        }
+
+        toStringCourse += "Assignment Weight Valid" + isAssignmentWeightValid();
+        return toStringCourse;
+    }
+
 }
 
 
