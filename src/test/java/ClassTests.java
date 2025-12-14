@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import util.Util;
 
 //Address class
 public class ClassTests {
@@ -30,7 +31,7 @@ public class ClassTests {
         boolean actual = Address.isPostalCodeValid(postalCode);
         Assertions.assertEquals(expected, actual);
     }
-
+//Department class
         @Test
         @DisplayName("isDepartmentNameValid: Computer Science -> true")
         void isDepartmentNameValidTest1() {
@@ -57,6 +58,38 @@ public class ClassTests {
             boolean actual = Department.isDepartmentNameValid(departmentName);
             Assertions.assertEquals(expected, actual);
         }
+
+//util totTitleCase
+@Test
+@DisplayName("toTitleCase: yi wang -> Yi Wang")
+void toTitleCaseTest1() {
+    String input = "yi wang";
+    String expected = "Yi Wang";
+    String actual = Util.toTitleCase(input);
+    Assertions.assertEquals(expected, actual);
+}
+
+    @Test
+    @DisplayName("toTitleCase: computer science and math -> Computer Science And Math")
+    void toTitleCaseTest2() {
+        String input = "computer science and math";
+        String expected = "Computer Science And Math";
+        String actual = Util.toTitleCase(input);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("toTitleCase: JOHN DOE -> John Doe")
+    void toTitleCaseTest3() {
+        String input = "JOHN DOE";
+        String expected = "John Doe";
+        String actual = Util.toTitleCase(input);
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+
     }
 
 
