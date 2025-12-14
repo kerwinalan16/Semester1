@@ -3,11 +3,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Assignment {
-    public String assignmentId;
-    public String assignmentName;
-    public double weight;
-    public List<Integer> scores;
-    public static int nextId = 1;
+    private String assignmentId;
+    private String assignmentName;
+    private double weight;
+    private List<Integer> scores;
+    private static int nextId = 1;
 
     public Assignment(String assignmentName, double weight) {
         this.assignmentName = assignmentName;
@@ -15,6 +15,12 @@ public class Assignment {
         this.scores = new ArrayList<>();
         this.assignmentId = String.format("%03d", nextId++);
     }
+    /**
+     * Calculates the average score of this assignment.
+     * Null scores are ignored when calculating the average.
+     * If scores = [90, null, 80], the average = (90 + 80) / 2 = 85.
+     * @return the average of non-null scores, or 0 if there are no scores or all scores are null
+     */
     public double calcAssignmentAvg() {
         if (scores.isEmpty()) return 0;
         double sum = 0;
@@ -63,6 +69,4 @@ public class Assignment {
                 ", scores=" + scores +
                 '}';
     }
-
-
 }
