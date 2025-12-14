@@ -1,3 +1,5 @@
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -5,7 +7,7 @@ import java.util.Random;
 public class Assignment {
     private String assignmentId;
     private String assignmentName;
-    private double weight;
+   @Getter private double weight;
     private List<Integer> scores;
     private static int nextId = 1;
 
