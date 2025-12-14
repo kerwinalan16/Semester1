@@ -8,7 +8,7 @@ public class Assignment {
     private String assignmentId;
     private String assignmentName;
    @Getter private double weight;
-    private List<Integer> scores;
+    @Getter private List<Integer> scores;
     private static int nextId = 1;
 
     public Assignment(String assignmentName, double weight) {
