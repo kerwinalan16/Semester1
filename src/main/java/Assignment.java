@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Assignment {
     private String assignmentId;
-    private String assignmentName;
+   @Getter private String assignmentName;
    @Getter private double weight;
     @Getter private List<Integer> scores;
     private static int nextId = 1;
@@ -40,26 +40,30 @@ public class Assignment {
      * If r == 3 or 4, generate a score in the range [70, 80).
      * If r >= 5 and <= 8, generate a score in the range [80, 90).
      * If r == 9 or 10, generate a score in the range [90, 100].
-     * @param numberOfStudents the number of students to generate scores for
      */
-    public void generateRandomScore(int numberOfStudents) {
+    public void generateRandomScore() {
         Random random = new Random();
-        for (int i = 0; i < numberOfStudents; i++) {
-            int r = random.nextInt(11); // 0-10
+        List<Integer> newScores = new ArrayList<>();
+
+        for (int i = 0; i < scores.size(); i++) {
+            int r = random.nextInt(11);
             int score;
+
             if (r == 0) {
-                score = random.nextInt(60); // 0-59
+                score = random.nextInt(60);
             } else if (r == 1 || r == 2) {
-                score = random.nextInt(60, 70); // 60-69
+                score = 60 + random.nextInt(10);
             } else if (r == 3 || r == 4) {
-                score = random.nextInt(70, 80); // 70-79
+                score = 70 + random.nextInt(10);
             } else if (r >= 5 && r <= 8) {
-                score = random.nextInt(80, 90); // 80-89
+                score = 80 + random.nextInt(10);
             } else {
-                score = random.nextInt(90, 101); // 90-100
+                score = 90 + random.nextInt(11);
             }
-            scores.add(score);
+
+            newScores.add(score);
         }
+
     }
 
     @Override
