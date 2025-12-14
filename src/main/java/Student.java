@@ -56,7 +56,22 @@ public class Student {
         return true;
     }
 
+    /**
+     * Drops a course for this student
+     * 1) Removes the course from the student's registeredCourses list
+     * 2) Removes this student from the course's registeredStudents list
+     * @param course the course to drop
+     * @return true if drop succeeded, false if the course was not registered
+     */
+    public boolean dropCourse(Course course) {
+        if (!registeredCourses.contains(course)) {
+            return false;
+        }
 
+        registeredCourses.remove(course);
+        course.getRegisteredStudents().remove(this);
+        return true;
+    }
 
 
 
