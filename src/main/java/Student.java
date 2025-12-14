@@ -3,7 +3,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -28,7 +27,8 @@ public class Student {
         this.registeredCourses = new ArrayList<>();
 
     }
-    public enum Gender{
+
+    public enum Gender {
         Male, Female
     }
 
@@ -37,6 +37,7 @@ public class Student {
      * 1) Adds the course to the student's registeredCourses list.
      * 2) Adds this student to the course's registeredStudents list.
      * 3) Appends a null for the scores of each assignment of the course.
+     *
      * @param course the course to register
      * @return true if registration succeeded, false if already registeredad
      */
@@ -60,6 +61,7 @@ public class Student {
      * Drops a course for this student
      * 1) Removes the course from the student's registeredCourses list
      * 2) Removes this student from the course's registeredStudents list
+     *
      * @param course the course to drop
      * @return true if drop succeeded, false if the course was not registered
      */
@@ -73,15 +75,33 @@ public class Student {
         return true;
     }
 
+    /**
+     * converts a student to a simple string with only the studentId, the studentName, and departmentName
+     *
+     * @return the simplifiedString
+     */
+    public String toSimplifiedString() {
+        return studentId + " - " + studentName + " - " + department.getDepartmentName();
+    }
 
-
-
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        String toStringStudent = "";
+        toStringStudent += "Student ID: " + studentId + "\n";
+        toStringStudent += "Name: " + studentName + "\n";
+        toStringStudent += "Gender: " + gender + "\n";
+        toStringStudent += "Address: " + address + "\n";
+        toStringStudent += "Department: " + department.getDepartmentName() + "\n";
+        if (registeredCourses.isEmpty()) {
+            toStringStudent += "None";
+        } else {
+            for (Course course : registeredCourses) {
+                toStringStudent += " " + course.getCourseId() + "-" + course.getCourseName() + "-" +
+                        course.getDepartment().getDepartmentName();
+            }
+        }
+        return toStringStudent;
 
 
     }
+}
