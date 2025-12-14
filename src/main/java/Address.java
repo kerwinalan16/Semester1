@@ -19,6 +19,16 @@ public class Address {
         AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT
     }
 
+    /**
+     * Checks whether a given postal code is valid.
+     * A valid postal code must satisfy the following conditions:
+     * The length must be exactly 6 characters.
+     * The format must alternate between a letter and a digit: C D C D C D,
+     * This method is static and should be called with a postal code parameter
+     * before assigning it to the field. Only valid postal codes should be assigned.
+     * @param postalCode the postal code to validate
+     * @return true if the postal code is valid according to the above rules, false otherwise
+     */
     public static boolean isPostalCodeValid(String postalCode) {
         if (postalCode == null || postalCode.length() != 6) {
             return false;
