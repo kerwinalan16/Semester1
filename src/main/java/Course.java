@@ -1,6 +1,7 @@
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class Course {
 
     public Course(String courseName, double credits, Department department) {
         this.courseId = String.format("C-%s-%02d", department.getDepartmentId(), nextId);
-        this.courseName = courseName;
+        this.courseName = Util.toTitleCase(courseName);
         this.credits = credits;
         this.department = department;
         this.assignments = new ArrayList<>();
@@ -129,30 +130,31 @@ public class Course {
      * displays the scores of a course in a table, with the assignment averages and student weighted average
      */
     public void displayScores() {
-        System.out.println("Course: " + courseName + " (" + courseId + ") ");
-        System.out.println("\t\t");
+        System.out.println("Course: " + Util.toTitleCase(courseName) + " (" + courseId + ") ");
 
-        for (Assignment assignment : assignments) {
-            System.out.println(assignment.getAssignmentName() + "\t");
+        System.out.printf("%-25s", "");
+        for (Assignment assignment: assignments) {
+            System.out.printf("%-15s", assignment.getAssignmentName());
         }
+            System.out.printf("%-15s%n", "Final Score");
+            int[] finalScores = calcStudentsAvg();
 
-        System.out.println("Final Score");
+            for (int i = 0; 1 < registeredStudents.size(); i++) {
+                Student student = registeredStudents.get(i);
 
-        for (int i = 0; i < registeredStudents.size(); i++) {
-            Student student = registeredStudents.get(i);
-            System.out.println(student.getStudentName() + "\t");
-
-            for (Assignment assignment : assignments) {
-                System.out.println(assignment.getScores().get(i) + "\t\t");
+                System.out.printf("%-25s", student.getStudentName());
+                for (Assignment assignment : assignments) {
+                    Integer score = assignment.getScores().get(i);
+                    System.out.printf("%-15s", score == null ? "-" : score);
+                }
+                System.out.printf("%-15s%n", finalScores[i]);
             }
-
-            System.out.println();
-        }
-
-        System.out.println("Average\t\t");
-        for (Assignment assignment : assignments) {
-            System.out.println((int) assignment.calcAssignmentAvg() + "\t\t");
-        }
+                System.out.printf("%-25s", "Average");
+                System.out.println();
+                for (Assignment assignment: assignments) {
+                    System.out.printf("%-15d", (int) assignment.calcAssignmentAvg());
+                    System.out.println();
+                }
         System.out.println();
     }
 
